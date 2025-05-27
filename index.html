@@ -2,31 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>RNG Game</title>
+  <title>Ultimate RNG</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎲 Aura RNG</h1>
+  <div class="container">
+    <h1>💎 RNG Aura Game</h1>
 
-  <div id="game">
-    <input type="text" id="playerName" placeholder="Enter your name" maxlength="12">
-    <button onclick="rollAura()" id="rollBtn">Roll Aura</button>
-    <p id="result">Click roll to begin...</p>
-    <p id="cooldownMsg"></p>
+    <input id="playerName" placeholder="Enter your unique name" maxlength="12" />
+    <button id="rollBtn" onclick="rollAura()">Roll Aura</button>
+    <p id="result">Ready to roll.</p>
+    <div id="cooldownMsg"></div>
 
-    <div id="inventory">
-      <h3>Your Inventory</h3>
+    <div class="inventory">
+      <h2>Your Auras</h2>
       <ul id="auraList"></ul>
     </div>
 
-    <h2>🏆 Leaderboard</h2>
-    <ul id="leaderboard"></ul>
-  </div>
+    <div class="leaderboard">
+      <h2>🏆 Leaderboard</h2>
+      <ul id="leaderboard"></ul>
+    </div>
 
-  <div id="devPanel" style="display:none;">
-    <h3>Developer Panel</h3>
-    <button onclick="clearLeaderboard()">Clear Leaderboard</button>
-    <button onclick="grantAllAuras()">Give All Auras</button>
+    <div id="devPanel" style="display: none;">
+      <h2>Developer Tools</h2>
+      <button onclick="grantAllAuras()">Give All Auras</button>
+      <button onclick="clearLeaderboard()">Clear Leaderboard</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
