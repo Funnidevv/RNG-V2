@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #111;
+  color: white;
+}
+
+#game {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.common { color: gray; }
+.rare { color: blue; }
+.epic { color: purple; }
+.legendary { color: orange; }
+.divine { color: gold; }
+
+input {
+  padding: 5px;
+}
