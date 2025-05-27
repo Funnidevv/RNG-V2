@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RNG Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🎲 Aura RNG</h1>
+
+  <div id="game">
+    <input type="text" id="playerName" placeholder="Enter your name" maxlength="12">
+    <button onclick="rollAura()" id="rollBtn">Roll Aura</button>
+    <p id="result">Click roll to begin...</p>
+    <p id="cooldownMsg"></p>
+
+    <div id="inventory">
+      <h3>Your Inventory</h3>
+      <ul id="auraList"></ul>
+    </div>
+
+    <h2>🏆 Leaderboard</h2>
+    <ul id="leaderboard"></ul>
+  </div>
+
+  <div id="devPanel" style="display:none;">
+    <h3>Developer Panel</h3>
+    <button onclick="clearLeaderboard()">Clear Leaderboard</button>
+    <button onclick="grantAllAuras()">Give All Auras</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
