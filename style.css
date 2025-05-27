@@ -51,6 +51,11 @@ li {
   margin: 4px;
 }
 
+.currency {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
 .common { color: gray; }
 .uncommon { color: green; }
 .rare { color: blue; }
