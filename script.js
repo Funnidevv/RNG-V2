@@ -3,19 +3,15 @@ const auras = [
   { name: "Green Glow", rarity: "uncommon", weight: 25, value: 3 },
   { name: "Blue Spark", rarity: "rare", weight: 10, value: 7 },
   { name: "Amethyst Wisp", rarity: "epic", weight: 5, value: 12 },
-  { name: "Flame Phoenix", rarity: "legendary", weight: 3, value: 20 },
-  { name: "Crimson Star", rarity: "mythic", weight: 2, value: 30 },
-  { name: "Golden Dragon", rarity: "divine", weight: 1.5, value: 45 },
-  { name: "Abyss Rift", rarity: "exotic", weight: 1, value: 60 },
-  { name: "Celestial Echo", rarity: "godly", weight: 0.5, value: 80 },
-  { name: "Ethereal Wave", rarity: "ethereal", weight: 0.2, value: 120 },
-  { name: "Void Sparkle", rarity: "transcendent", weight: 0.1, value: 200 },
-  { name: "Infinity Core", rarity: "infinity", weight: 0.05, value: 500 }
+  { name: "Flame Phoenix", rarity: "legendary", weight: 2, value: 25 },
+  { name: "Infinity Core", rarity: "infinity", weight: 0.1, value: 100 }
 ];
 
 let cooldown = false;
 let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 let auraCurrency = parseInt(localStorage.getItem("auraCurrency")) || 0;
+let totalEarned = parseInt(localStorage.getItem("totalEarned")) || 0;
+let totalSpent = parseInt(localStorage.getItem("totalSpent")) || 0;
 let playerName = localStorage.getItem("playerName") || "";
 let isDev = false;
 
@@ -32,7 +28,7 @@ function rollAura() {
     localStorage.setItem("playerName", name);
     playerName = name;
   } else if (name !== playerName && !isDev) {
-    return alert("You cannot change names after playing.");
+    return alert("You can't change names after locking in.");
   }
 
   const aura = getWeightedRandomAura();
@@ -42,7 +38,7 @@ function rollAura() {
   document.getElementById("result").innerHTML =
     `You rolled: <span class="${aura.rarity}">${aura.name}</span>`;
   renderInventory();
-  playSound();
+  playSound("roll");
 
   if (!isDev) {
     cooldown = true;
@@ -75,11 +71,12 @@ function renderInventory() {
   inventory.forEach((aura, index) => {
     const li = document.createElement("li");
     li.className = aura.rarity;
+    li.setAttribute("data-tooltip", `${aura.name} - ${aura.rarity.toUpperCase()} - 🌀 ${aura.value}`);
     li.textContent = aura.name;
     list.appendChild(li);
 
     const sellLi = document.createElement("li");
-    sellLi.innerHTML = `<span class="${aura.rarity}">${aura.name}</span> - ${aura.value} Aura 
+    sellLi.innerHTML = `<span class="${aura.rarity}" data-tooltip="${aura.name} - ${aura.rarity.toUpperCase()}"> ${aura.name}</span> - ${aura.value} 
       <button onclick="sellAura(${index})">Sell</button>`;
     shop.appendChild(sellLi);
   });
@@ -88,19 +85,26 @@ function renderInventory() {
 function sellAura(index) {
   const sold = inventory.splice(index, 1)[0];
   auraCurrency += sold.value;
+  totalEarned += sold.value;
   localStorage.setItem("inventory", JSON.stringify(inventory));
   localStorage.setItem("auraCurrency", auraCurrency);
+  localStorage.setItem("totalEarned", totalEarned);
   renderInventory();
   renderCurrency();
+  playSound("sell");
 }
 
 function renderCurrency() {
   document.getElementById("auraCurrency").textContent = auraCurrency;
+  document.getElementById("totalEarned").textContent = totalEarned;
+  document.getElementById("totalSpent").textContent = totalSpent;
 }
 
-function playSound() {
-  const audio = new Audio("https://actions.google.com/sounds/v1/cartoon/pop.ogg");
-  audio.play();
+function playSound(type) {
+  let url = type === "sell"
+    ? "https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+    : "https://actions.google.com/sounds/v1/cartoon/pop.ogg";
+  new Audio(url).play();
 }
 
 function promptDevCode() {
@@ -109,6 +113,7 @@ function promptDevCode() {
     isDev = true;
     document.getElementById("devPanel").style.display = "block";
     alert("Developer mode activated.");
+    logDev("Developer mode unlocked.");
   }
 }
 
@@ -116,10 +121,27 @@ function grantAllAuras() {
   inventory = [...auras];
   localStorage.setItem("inventory", JSON.stringify(inventory));
   renderInventory();
+  logDev("All auras granted.");
 }
 
 function addCurrency(amount) {
   auraCurrency += amount;
+  totalEarned += amount;
   localStorage.setItem("auraCurrency", auraCurrency);
+  localStorage.setItem("totalEarned", totalEarned);
   renderCurrency();
+  logDev(`Added ${amount} Aura.`);
+}
+
+function clearInventory() {
+  inventory = [];
+  localStorage.setItem("inventory", JSON.stringify(inventory));
+  renderInventory();
+  logDev("Inventory cleared.");
+}
+
+function logDev(msg) {
+  const log = document.getElementById("devLog");
+  log.innerHTML += `> ${msg}<br>`;
+  log.scrollTop = log.scrollHeight;
 }
