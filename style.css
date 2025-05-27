@@ -1,31 +1,65 @@
 body {
-  font-family: sans-serif;
-  text-align: center;
-  background: #111;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #1f1c2c, #928dab);
   color: white;
+  text-align: center;
+  padding: 20px;
 }
 
-#game {
-  margin-top: 20px;
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: #222;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px #000;
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
 }
 
 button {
-  padding: 10px;
-  margin: 10px;
+  background: #00f0ff;
+  border: none;
+  padding: 10px 20px;
   font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #00bfff;
+}
+
+#result {
+  margin: 15px 0;
+  font-size: 18px;
 }
 
 ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
+li {
+  margin: 4px;
+}
+
 .common { color: gray; }
+.uncommon { color: green; }
 .rare { color: blue; }
 .epic { color: purple; }
 .legendary { color: orange; }
+.mythic { color: crimson; }
 .divine { color: gold; }
-
-input {
-  padding: 5px;
-}
+.exotic { color: #0ff; }
+.godly { color: hotpink; }
+.ethereal { color: lightblue; }
+.transcendent { color: violet; }
+.infinity { color: white; text-shadow: 0 0 10px #fff; }
