@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ultimate RNG</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>RNG Aura Game</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -14,21 +14,25 @@
     <p id="result">Ready to roll.</p>
     <div id="cooldownMsg"></div>
 
+    <p class="currency">Aura Currency: <span id="auraCurrency">0</span> 🌀</p>
+
     <div class="inventory">
       <h2>Your Auras</h2>
       <ul id="auraList"></ul>
     </div>
 
-    <div class="leaderboard">
-      <h2>🏆 Leaderboard</h2>
-      <ul id="leaderboard"></ul>
+    <div class="shop">
+      <h2>🛒 Shop - Sell Auras</h2>
+      <ul id="shopList"></ul>
     </div>
 
     <div id="devPanel" style="display: none;">
       <h2>Developer Tools</h2>
       <button onclick="grantAllAuras()">Give All Auras</button>
-      <button onclick="clearLeaderboard()">Clear Leaderboard</button>
+      <button onclick="addCurrency(9999)">+9999 Aura</button>
     </div>
+
+    <button onclick="promptDevCode()">🔑 Enter Developer Code</button>
   </div>
 
   <script src="script.js"></script>
