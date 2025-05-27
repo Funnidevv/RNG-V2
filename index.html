@@ -2,19 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RNG Aura Game</title>
+  <title>Advanced RNG Aura Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>💎 RNG Aura Game</h1>
+    <h1>🌟 RNG Aura Game</h1>
 
-    <input id="playerName" placeholder="Enter your unique name" maxlength="12" />
+    <input id="playerName" placeholder="Enter your unique name" maxlength="16" />
     <button id="rollBtn" onclick="rollAura()">Roll Aura</button>
     <p id="result">Ready to roll.</p>
     <div id="cooldownMsg"></div>
 
-    <p class="currency">Aura Currency: <span id="auraCurrency">0</span> 🌀</p>
+    <div class="wallet">
+      <p><strong>Aura Currency:</strong> <span id="auraCurrency">0</span> 🌀</p>
+      <p><small>Total Earned: <span id="totalEarned">0</span> | Spent: <span id="totalSpent">0</span></small></p>
+    </div>
 
     <div class="inventory">
       <h2>Your Auras</h2>
@@ -26,10 +29,12 @@
       <ul id="shopList"></ul>
     </div>
 
-    <div id="devPanel" style="display: none;">
-      <h2>Developer Tools</h2>
-      <button onclick="grantAllAuras()">Give All Auras</button>
+    <div id="devPanel" class="dev" style="display: none;">
+      <h2>Developer Panel</h2>
+      <button onclick="grantAllAuras()">Grant All Auras</button>
       <button onclick="addCurrency(9999)">+9999 Aura</button>
+      <button onclick="clearInventory()">Clear Inventory</button>
+      <div id="devLog" class="log"></div>
     </div>
 
     <button onclick="promptDevCode()">🔑 Enter Developer Code</button>
